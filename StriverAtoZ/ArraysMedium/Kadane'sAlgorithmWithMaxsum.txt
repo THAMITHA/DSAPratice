@@ -1,0 +1,102 @@
+Approach 1:
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n=nums.length,max=Integer.MIN_VALUE;
+        if(n==1){
+            return nums[0];
+        }
+        for(int i=0;i<n;i++){
+             
+            for(int j=i;j<n;j++){
+             int sum=0;  
+                for(int k=i;k<=j;k++){
+                    sum+=nums[k];
+                    if(sum>max){
+                        max=sum;
+                    }
+                    if(sum<0){
+                        sum=0;
+                    }
+                }
+            }
+            
+        }
+        return max;
+    }
+}
+
+
+
+Approach 2:
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n=nums.length,max=Integer.MIN_VALUE;
+        if(n==1){
+            return nums[0];
+        }
+        for(int i=0;i<n;i++){
+             int sum=0;  
+             
+            for(int j=i;j<n;j++){
+                    sum+=nums[j];
+                    if(sum>max){
+                        max=sum;
+                    }
+                    if(sum<0){
+                        sum=0;
+                    }
+                }
+            }
+            return max;     
+        }
+       
+    }
+
+Approach 3:
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int max=Integer.MIN_VALUE,sum=0,n=nums.length;
+        if(n==1){
+            return nums[0];
+        }    
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+            if(sum>max){
+                max=sum;
+            }
+            if(sum<0){
+                sum=0;
+            }
+           
+        }
+        return max;
+    }
+}
+///////////////////////////////////////////////////
+to find start and end for maxSubArray
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum=0,maxi=Integer.MIN_VALUE,start=-1,mEnd=-1,mStart=-1;
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+            if(sum==0){
+                start=i;
+            }
+            if(sum>maxi){
+                maxi=sum;
+                mStart=start;
+                mEnd=i;
+            }
+            if(sum<0){
+                sum=0;
+            }
+            
+
+        }
+        return maxi;
+    }
+}
