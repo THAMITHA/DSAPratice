@@ -1,0 +1,33 @@
+Count Digits
+SchoolAccuracy: 30.45%Submissions: 62K+Points: 0
+Register NOW for the latest GFG Job-a-thon: Hiring Challenge !!  
+
+Given a number N. Count the number of digits in N which evenly divides N.
+
+Note :- Evenly divides means whether N is divisible by a digit i.e. leaves a remainder 0 when divided.
+ 
+
+Example 1:
+
+Input:
+N = 12
+Output:
+2
+Explanation:
+1, 2 both divide 12 evenly
+
+
+class Solution{
+    static int evenlyDivides(int N){
+        int num=N;
+        int count=0;
+        while(N>0){
+            int div=N%10;
+            if (div != 0 && num%div==0){ // check if div is not zero before division
+                count++;
+            }
+            N=N/10;
+        }
+        return count;
+    }
+}

@@ -1,0 +1,141 @@
+Rotate array
+Send Feedback
+You have been given a random integer array/list(ARR) of size N. Write a function that rotates the given array/list by D elements(towards the left).
+ Note:
+Change in the input array/list itself. You don't need to return or print the elements.
+Input format :
+The first line contains an Integer 't' which denotes the number of test cases or queries to be run. Then the test cases follow.
+
+First line of each test case or query contains an integer 'N' representing the size of the array/list.
+
+Second line contains 'N' single space separated integers representing the elements in the array/list.
+
+Third line contains the value of 'D' by which the array/list needs to be rotated.
+Output Format :
+For each test case, print the rotated array/list in a row separated by a single space.
+
+Output for every test case will be printed in a separate line.
+Constraints :
+1 <= t <= 10^4
+0 <= N <= 10^6
+0 <= D <= N
+Time Limit: 1 sec
+Sample Input 1:
+1
+7
+1 2 3 4 5 6 7
+2
+Sample Output 1:
+3 4 5 6 7 1 2
+Sample Input 2:
+2
+7
+1 2 3 4 5 6 7
+0
+4
+1 2 3 4
+2
+Sample Output 2:
+1 2 3 4 5 6 7
+3 4 1 2
+
+Approach 1
+
+Exp:left-shift the element one-by-one according to given d
+ 
+public class Solution {  
+
+    public static void rotate(int[] arr, int d) {
+    	int n=arr.length;
+        for(int i=0;i<d;i++){
+            int temp=arr[0];
+            for(int j=0;j<n-1;j++){
+                arr[j]=arr[j+1];
+            }
+            arr[n-1]=temp;
+        }
+    }
+}
+
+Approach 2
+
+Exp: step1:store the d elements in the new array
+     step2:shift the elements by d position
+     step3:put the d elements from new array to orginal at the end 		
+
+public class Solution {  
+
+    public static void rotate(int[] arr, int d) {
+    	int arr1[]=new int[d],n=arr.length;
+        for(int i=0;i<d;i++){
+            arr1[i]=arr[i];
+        }
+        int p=0; 
+        for(int i=d;i<n;i++){
+            arr[p++]=arr[i];
+        }
+
+        for(int i=0;i<d;i++){
+            arr[p++]=arr1[i];
+        }
+    }
+
+}
+
+
+or
+
+public class Solution {  
+
+    public static void rotate(int[] arr, int d) {
+    	  int n=arr.length;	
+		  int temp[]=new int[d];
+	    	int i;
+	    	for(i=0;i<d;i++) {
+	    		temp[i]=arr[i];
+	    	}
+	    	i=0;
+	    	for(int j=d-1;j<n-1;j++) {
+	    		arr[i++]=arr[j+1];
+	    	}
+	    	i=0;
+	    	for(int p=n-d;p<n;p++) {
+	    		arr[p]=temp[i++];
+	    	}
+    }
+
+}
+
+
+Approach 3:
+
+exp:Reverse the whole array
+    Reverse the array from 0 to n-d
+    Reverse the array from n-d to n			
+
+public class Solution {  
+
+public static void swap(int[] arr,int start,int end){
+    int temp=arr[start];
+    arr[start]=arr[end];
+    arr[end]=temp;
+}
+public static void reverse(int[] arr,int s,int e){
+    
+    while(s<=e){
+        swap(arr,s,e);
+        s++;
+        e--;
+    }
+}
+    public static void rotate(int[] arr, int d) {
+        if(d>=arr.length && arr.length!=0){
+            d%=arr.length;
+        }
+        int n=arr.length;
+        reverse(arr,0,n-1);
+        reverse(arr,0,n-d-1);
+        reverse(arr,n-d,n-1);
+    }
+
+}

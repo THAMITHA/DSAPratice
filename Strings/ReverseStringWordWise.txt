@@ -1,0 +1,71 @@
+Reverse String Wordwise
+
+Reverse the given string word wise. That is, the last word in given string should come at 1st place, last second word at 2nd place and so on. Individual words should remain as it is.
+Input format :
+String in a single line
+Output format :
+Word wise reversed string in a single line
+Constraints :
+0 <= |S| <= 10^7
+where |S| represents the length of string, S.
+Sample Input 1:
+Welcome to Coding Ninjas
+Sample Output 1:
+Ninjas Coding to Welcome
+Sample Input 2:
+Always indent your code
+Sample Output 2:
+code your indent Always
+
+public class Solution {
+    public static String reverseWordWise(String str) {
+        int startIndex=0;
+        int i=0;
+        String ans="";
+        for(;i<str.length();i++){
+            if(str.charAt(i)==' '){
+                int endindex=i-1;
+                String word="";
+                for(int j=startIndex;j<=endindex;j++)
+                {
+                    word+=str.charAt(j);
+                }           
+
+                ans=word+" "+ans;
+                startIndex=i+1;
+            }
+        }
+        int endIndex=i-1;
+        String word="";
+        for(int j=startIndex;j<=endIndex;j++)
+        {
+            word+=str.charAt(j);
+        }
+        ans=word+" "+ans;
+        return ans;
+
+
+    }
+}
+
+
+LeetCode
+
+class Solution {
+    public String reverseWords(String s) {
+        String result="";
+        int i=0;
+        int n=s.length();
+        while(i<n){
+            while(i<n && s.charAt(i)==' ')i++;
+            if(i>=n)break;
+            int j=i+1;
+            while(j<n && s.charAt(j)!=' ')j++;
+            String sub=s.substring(i,j);
+            if(result.length()==0) result=sub;
+            else result=sub+" "+result;
+            i=j+1;
+        }
+        return result;
+    }
+}

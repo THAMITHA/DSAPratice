@@ -1,0 +1,79 @@
+Reverse Words in a String III
+Given a string s, reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+
+Example 1:
+
+Input: s = "Let's take LeetCode contest"
+Output: "s'teL ekat edoCteeL tsetnoc"
+Example 2:
+
+Input: s = "God Ding"
+Output: "doG gniD"
+
+import java.util.Scanner;
+
+public class main {
+	public static String reverseWord(String str) {
+		String ans="";
+		int startIndex=0,i=0;
+		for(;i<str.length();i++) {
+			if(str.charAt(i)==' ') {
+				int endIndex=i-1;
+				String revWord="";
+				for(int j=startIndex;j<=endIndex;j++) {
+					revWord=str.charAt(j)+revWord;
+				}
+				
+				ans+=revWord+" ";
+				startIndex=i+1;
+			}
+			
+		}
+		int endIndex=i-1;
+		String revWord="";
+		for(int j=startIndex;j<=endIndex;j++) {
+			revWord=str.charAt(j)+revWord;
+		}
+		
+		ans+=revWord;
+		
+				
+			return ans;
+	}
+
+	public static void main(String[] args) 
+	{
+		Scanner sc=new Scanner(System.in);
+		
+		System.out.println("enter");
+		String str=sc.nextLine();
+		System.out.println(reverseWord(str));
+	}
+}
+
+
+
+Approach 2:
+<leetcode>
+class Solution {
+    public String reverseWords(String input) {
+        String ans="";
+		int currentStart=0,n=input.length();
+		while(currentStart<n) {
+			String revWord="";
+			int currentEnd=currentStart+1;
+			while(currentEnd<n && input.charAt(currentEnd)!=' ') {
+				currentEnd++;
+			}
+			for(int i=currentStart;i<currentEnd;i++) {
+				revWord=input.charAt(i)+revWord;
+			}
+			ans+=revWord+" ";
+			currentStart=currentEnd+1;
+			
+			
+		}
+        ans=ans.trim();
+		return ans;
+    }
+}

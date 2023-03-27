@@ -1,0 +1,127 @@
+Print Spiral
+
+For a given two-dimensional integer array/list of size (N x M), print it in a spiral form. That is, you need to print in the order followed for every iteration:
+a. First row(left to right)
+b. Last column(top to bottom)
+c. Last row(right to left)
+d. First column(bottom to top)
+ Mind that every element will be printed only once.
+
+
+Approach1:
+
+public class Solution {
+
+	public static void spiralPrint(int matrix[][]){
+		int n=matrix.length,direction=0;
+		if(n==0){
+			return;
+		}
+		
+		int m = matrix[0].length;
+		int left = 0, right = m - 1, top = 0, bottom = n - 1;
+
+		while (left <= right && top <= bottom) {
+			if (direction == 0) {
+				for (int i = left; i <= right; i++) {
+					System.out.print(matrix[top][i] + " ");
+				}
+				top += 1;
+			}
+			 else if (direction == 1) {
+				for (int i = top; i <= bottom; i++) {
+					System.out.print(matrix[i][right] + " ");
+				}
+				right -= 1;
+			} 
+			else if (direction == 2) {
+				for (int i = right; i >= left; i--) {
+					System.out.print(matrix[bottom][i] + " ");
+				}
+				bottom -= 1;
+			}
+			 else if (direction == 3) {
+				for (int i = bottom; i >= top; i--) {
+					System.out.print(matrix[i][left] + " ");
+				}
+				left += 1;
+			}
+			direction = (direction + 1) % 4;
+		}
+	}
+}
+
+Approach 2: return list
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new ArrayList<Integer>();
+        int n = matrix.length;
+        if (n == 0) {
+            return result;
+        }
+        int m = matrix[0].length;
+        int left = 0, right = m - 1, top = 0, bottom = n - 1;
+
+        while (left <= right && top <= bottom) {
+            // Print top row
+            for (int i = left; i <= right; i++) {
+                result.add(matrix[top][i]);
+            }
+            top++;
+            
+            // Print right column
+            for (int i = top; i <= bottom; i++) {
+                result.add(matrix[i][right]);
+            }
+            right--;
+            
+            // Print bottom row
+            if (top <= bottom) {
+                for (int i = right; i >= left; i--) {
+                    result.add(matrix[bottom][i]);
+                }
+                bottom--;
+            }
+            
+            // Print left column
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--) {
+                    result.add(matrix[i][left]);
+                }
+                left++;
+            }
+        }
+        return result;
+    }
+}
+
+
+Approach 3:
+
+public class Solution {
+
+	public static void spiralPrint(int matrix[][]){
+		int nRows=matrix.length;
+        int mCols=matrix.length;
+        if(nRows==0){
+            return;
+        }
+        int numElements=nRows*mCols;
+        int i,rowStarts=0,colStarts=0;
+        while(count<numElements){
+            for(i=colStarts;count<numElements && i<mCols;i++){
+                System.out.print(matrix[rowStarts][i]);
+                count++;
+			}
+            rowStarts++;
+            for(i=rowStarts;count<numElements&&i<nRows;i++){
+ 				System.out.print(matrix[i][mCols]);
+               }
+            
+        }
+	}
+}

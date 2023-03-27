@@ -1,0 +1,35 @@
+we are creating a store of  books which only has one kind of book, and we want to create invoices. 
+
+it should print the invoices and it includes discount and tax  while calculating the the total payable amount. 
+
+total amount  = book_price * quantity - discount + tax
+
+tax = 30%, and discount  = 30%
+Ghanshyam saishy7:19 PM
+book, Invoice
+
+book{
+
+Price,
+
+name,
+
+author,
+
+}
+
+Invoice{
+
+books,
+
+amount,
+
+tax,
+
+date of purchase,
+
+quantity,
+
+discount,
+
+}

@@ -1,0 +1,93 @@
+Union of Two Sorted Arrays
+EasyAccuracy: 31.39%Submissions: 112K+Points: 2
+Register NOW for the latest GFG Job-a-thon: Hiring Challenge !!  
+
+Union of two arrays can be defined as the common and distinct elements in the two arrays.
+Given two sorted arrays of size n and m respectively, find their union.
+
+
+Example 1:
+
+Input: 
+n = 5, arr1[] = {1, 2, 3, 4, 5}  
+m = 3, arr2 [] = {1, 2, 3}
+Output: 1 2 3 4 5
+Explanation: Distinct elements including 
+both the arrays are: 1 2 3 4 5.
+ 
+
+Example 2:
+
+Input: 
+n = 5, arr1[] = {2, 2, 3, 4, 5}  
+m = 5, arr2[] = {1, 1, 2, 3, 4}
+Output: 1 2 3 4 5
+Explanation: Distinct elements including 
+both the arrays are: 1 2 3 4 5.
+ 
+
+Example 3:
+
+Input:
+n = 5, arr1[] = {1, 1, 1, 1, 1}
+m = 5, arr2[] = {2, 2, 2, 2, 2}
+Output: 1 2
+Explanation: Distinct elements including 
+both the arrays are: 1 2.
+
+Your Task: 
+You do not need to read input or print anything. Complete the function findUnion() that takes two arrays arr1[], arr2[], and their size n and m as input parameters and returns a list containing the union of the two arrays. 
+ 
+
+Expected Time Complexity: O(n+m).
+Expected Auxiliary Space: O(n+m).
+ 
+
+class Solution
+{
+    public static ArrayList<Integer> findUnion(int arr1[], int arr2[], int n, int m)
+    {
+        Set<Integer> ar=new HashSet<>();
+        for(int i=0;i<arr1.length;i++){
+            ar.add(arr1[i]);
+        }
+        for(int j=0;j<arr2.length;j++){
+            ar.add(arr2[j]);
+        }
+        ArrayList<Integer>arr=new ArrayList<>(ar);
+        Collections.sort(arr);
+        return arr;
+        
+    }
+}
+
+
+Approach2:
+
+class Solution
+{
+    public static ArrayList<Integer> findUnion(int arr1[], int arr2[], int n, int m)
+    {
+        Set<Integer> ar=new HashSet<>();
+        int i=0,j=0;
+        while(i<n && j<m){
+            if(arr1[i]<arr2[j]){
+                ar.add(arr1[i++]);
+            }
+            else{
+                ar.add(arr2[j++]);
+            }
+        }
+        while(i<n){
+            ar.add(arr1[i++]);
+        }
+        while(j<m){
+            ar.add(arr2[j++]);
+        }
+        ArrayList<Integer>ar1=new ArrayList<>(ar);
+        Collections.sort(ar1);
+        return ar1;
+        
+    }
+}
+
