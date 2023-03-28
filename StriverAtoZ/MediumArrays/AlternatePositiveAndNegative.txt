@@ -53,3 +53,72 @@ public class Solution {
         return nums;
     }
 }
+
+Approach 3:
+
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+     int pos=0,neg=1;
+     int res[]=new int[nums.length];
+     
+     while(pos<nums.length && neg<nums.length){
+        for(int i=0;i<nums.length;i++){
+             if(nums[i]>0){
+             res[pos]=nums[i];
+             pos=pos+2;
+         }
+         else{
+             res[neg]=nums[i];
+             neg=neg+2;
+         }
+     }   
+     
+        }
+     return res;   
+    }
+}
+
+
+
+////
+note not equal psotive and negative numbers are present 
+Approach 1
+
+class Solution {
+    void rearrange(int arr[], int n) {
+        List<Integer>pos=new ArrayList<>();
+        List<Integer>neg=new ArrayList<>();
+        
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]<0){
+                neg.add(arr[i]);
+            }
+            else{
+                pos.add(arr[i]);
+            }
+        }
+        if(neg.size()<pos.size()){
+        
+        for(int i=0;i<neg.size();i++){
+            arr[2*i]=pos.get(i);
+            arr[2*i+1]=neg.get(i);
+        }
+        int index=2*neg.size();
+        for(int i=neg.size();i<pos.size();i++){
+            arr[index++]=pos.get(i);
+        }
+    }
+    else{
+        
+        for(int i=0;i<pos.size();i++){
+            arr[2*i]=pos.get(i);
+            arr[2*i+1]=neg.get(i);
+        }
+        int index=2*pos.size();
+        for(int i=pos.size();i<neg.size();i++){
+            arr[index++]=neg.get(i);
+        }
+    }
+
+    }
+}
