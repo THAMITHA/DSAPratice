@@ -1,0 +1,95 @@
+import java.util.*;
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        if(target==Integer.MAX_VALUE || target==Integer.MIN_VALUE){
+            return ans;
+        } 
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                for(int k=j+1;k<n;k++){
+                    int sum=nums[i]+nums[j]+nums[k];
+                    int key=target-sum;
+                    int low=k+1;
+                    int high=n-1;
+                    int res=binarySearch(key,low,high,nums);
+                    if((nums[i]+nums[j]+nums[k]+res)==target){
+                        List<Integer>temp=new ArrayList<>();
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(nums[k]);
+                        temp.add(res);
+                        Collections.sort(temp);
+                        if(!ans.contains(temp)){
+                            ans.add(temp);
+                        }
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+    public int binarySearch(int key,int low,int high,int[] nums){
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(nums[mid]==key){
+                return nums[mid];
+            }
+            else if(nums[mid]<key){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+            
+        }
+        // key not found, return a value outside the range of possible values
+        // in the input array
+        if (high < 0) {
+            return Integer.MAX_VALUE;
+        } else if (low >= nums.length) {
+            return Integer.MIN_VALUE;
+        } else {
+            return nums[low];
+        }
+    }
+}
+
+
+
+
+///////////////////////////
+
+import java.util.*;
+
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
+        for (int i = 0; i < n - 3; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            for (int j = i + 1; j < n - 2; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+                int left = j + 1, right = n - 1;
+                while (left < right) {
+                    int sum = nums[i] + nums[j] + nums[left] + nums[right];
+                    if (sum == target) {
+                        ans.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+                        while (left < right && nums[left] == nums[left + 1]) left++;
+                        while (left < right && nums[right] == nums[right - 1]) right--;
+                        left++;
+                        right--;
+                    } else if (sum < target) {
+                        left++;
+                    } else {
+                        right--;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+}
